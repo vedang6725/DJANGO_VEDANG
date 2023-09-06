@@ -7,7 +7,12 @@ from food.models import Item
 
 def index(request):
     itemlist = Item.objects.all()
-    return HttpResponse(itemlist)
+
+    context = {
+        'itemlist': itemlist
+    }
+    
+    return render(request, 'food/index.html', context)
 
 
 def detail(request):

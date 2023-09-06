@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from food.models import Item
 
 # Create your views here.
 
+
 def index(request):
-    return HttpResponse('<h1 style = "color: red">This is a index page</h1>')
+    itemlist = Item.objects.all()
+    return HttpResponse(itemlist)
+
 
 def detail(request):
     return HttpResponse('<h1 style = "color:blue">This is a detail page</h1>')

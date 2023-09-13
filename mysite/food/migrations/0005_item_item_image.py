@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='item',
             name='item_image',
-            field=models.CharField(default='https://rrslide.com/wp-content/uploads/edd/2022/05/Food-Placeholder-Slides-PPT-14-min.jpg', max_length=500),
+            field=models.CharField(default='https://rrslide.com/wp-content/uploads/edd/2022/05/Food-Placeholder-Slides-PPT-14-min.jpg', max_length=100),
         ),
     ]

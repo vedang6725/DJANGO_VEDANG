@@ -23,3 +23,5 @@ def detail(request, item_id):
     }
 
     return render(request, 'food/detail.html', context)
+
+

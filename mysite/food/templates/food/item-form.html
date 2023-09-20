@@ -1,5 +1,24 @@
+{% extends 'food/base.html' %}
+{% block body %}
+
+
 <form method="POST">
     {% csrf_token %}
-    {{ form }}
+     <label>Product Code: </label><br>
+    {{ form.prod_code }}<br>
+    <br><label>For User: </label><br>
+    {{ form.for_user }}<br>
+    <br><label>Item Name: </label><br>
+    {{ form.item_name }}<br>
+    <br><label>Item Description: </label><br>
+    {{ form.item_desc }}<br>
+    <br><label>Item Price: </label><br>
+    {{ form.item_price }}<br>
+    <br><label>Item Image: </label><br>
+    {{ form.item_image }}<br> 
+
+
     <button type="submit">SAVE</button>
 </form>
+
+{%  endblock %}

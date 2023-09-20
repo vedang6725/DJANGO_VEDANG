@@ -12,11 +12,11 @@
 </head>
 <body>
    <nav class="navbar navbar-dark bg-dark">
-    <a href="{% url 'food:index' %}" class="nav-brand">
+    <a href="{% url 'food:index' %}" class="nav-brand" style="font-style: italic; font-size: 1.3rem; text-align:justify">
         Exortillo</a>
 
     <div class="navbar">
-        <a href="#" class="nav-item nav-link btn btn-dark">
+        <a href="{% url 'food:create_item'%}" class="nav-item nav-link btn btn-dark">
             Add item
         </a>
 

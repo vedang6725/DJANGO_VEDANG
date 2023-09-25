@@ -20,15 +20,24 @@
             Add item
         </a>
 
-        <a href="{% url 'food:create_item'%}" class="nav-item nav-link btn btn-dark">
+        <a href="#" class="nav-item nav-link btn btn-dark">
             Profile
         </a>
 
-        <a href="{% url 'food:create_item'%}" class="nav-item nav-link btn btn-dark">
+        <a href="{% url 'register'%}" class="nav-item nav-link btn btn-dark">
             Sign Up
         </a>
     </div>
 </nav>
+{% if messages %}
+
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+{% endif %}
 
 <!-- for spacing -->
 <div class="mb-5">

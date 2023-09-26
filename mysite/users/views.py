@@ -44,10 +44,7 @@ def login_view(request):
     return render(request, 'users/login.html', context)
 
 def logout_view(request):
+    logout(request)
+    return redirect('food:index')
 
-    if request.method == 'POST':
-        logout(request)
-        return redirect('food:index')
-
-    return render(request, 'users/logout.html')
-
+ 

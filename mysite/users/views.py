@@ -12,9 +12,9 @@ def register(request):
 
         if form.is_valid():
             username = form.cleaned_data.get('username')
-            messages.success(request, 'Welcome {}, your account has been successfully created'.format(username))
+            messages.success(request, 'Welcome {}, your account has been successfully created. Now you may log in'.format(username))
             form.save()
-            return redirect('food:index')
+            return redirect('login')
     
     else:
         form = RegisterForm()
@@ -34,11 +34,11 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            
+            login(request, user)
             messages.success(
                 request,'Welcome {}, you have been successfully logged in'.format(request.user.username))
             return redirect('food:index')
-        login(request, user)
+        
         
     context = {
             
@@ -47,6 +47,9 @@ def login_view(request):
     return render(request, 'users/login.html', context)
 
 def logout_view(request):
+    
+    messages.success(
+                request,'{}, you have been successfully logged out'.format(request.user.username))
     logout(request)
     return redirect('food:index')
 

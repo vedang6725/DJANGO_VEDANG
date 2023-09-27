@@ -12,8 +12,8 @@
 </head>
 <body>
    <nav class="navbar navbar-dark bg-dark">
-    <a href="{% url 'food:index' %}" class="nav-brand" style="font-style: italic; font-size: 1.3rem; text-align:justify">
-        Exortillo</a>
+    <a href="{% url 'food:index' %}" class="nav-brand" style="font-style: italic; font-size: 1.3rem; text-align:justify; color:red">
+       <h2> Exortillo </h2></a>
 
     <div class="navbar">
         {% if user.is_authenticated %}

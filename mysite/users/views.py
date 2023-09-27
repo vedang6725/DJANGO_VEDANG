@@ -68,4 +68,6 @@ def logout_view(request):
     logout(request)
     return redirect('food:index')
 
- 
+def profilepage(request):
+    return render(request, 'users/profile.html')
+

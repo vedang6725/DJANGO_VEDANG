@@ -13,5 +13,5 @@ class Item(models.Model):
         default="https://livingstonbagel.com/wp-content/uploads/2016/11/food-placeholder.jpg"
      )
     
-    def _str_(self):
+    def __str__(self):
         return self.item_name

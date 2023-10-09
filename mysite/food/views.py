@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from food.models import Item
 from food.forms import ItemForm
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
 # Create your views here.
 # ----------------------------------------------------------------
@@ -41,6 +42,16 @@ def detail(request, item_id):
     }
 
     return render(request, 'food/detail.html', context)
+
+# class based detail view
+# ----------------------------------------------------
+
+class FoodDetail(DetailView):
+    
+    model = Item
+    context_object_name = 'item'
+    template_name = 'food/detail.html'
+
 
 # function based create item view
 # ----------------------------------------------------

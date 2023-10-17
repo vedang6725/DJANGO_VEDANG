@@ -119,15 +119,28 @@ def update_item(request, id):
     item = Item.objects.get(pk=id)
     form = ItemForm(request.POST or None, instance=item)
 
+
+
     context = {
         'form': form
     }
 
     if form.is_valid():
         form.save()
+
+        Obj_History = History(
+            user_name = request.user.username,
+            prod_ref  = form.instance.prod_code,
+            item_name = request.POST.get('item_name'),   #form.instance.item_name,
+            op_type   = "Updated"
+        )
+
+        Obj_History.save()
         return redirect('food:index')
 
     return render(request, 'food/item-form.html', context)
+
+
 
 # function based delete item view
 # ----------------------------------------------------

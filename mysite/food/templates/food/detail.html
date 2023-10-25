@@ -1,185 +1,114 @@
+{% extends 'food/base.html' %} {% block body %}
 
-
-{% extends 'food/base.html' %}
-
-{% block body %}
-
-
-	<div class="row">
-		<div class="col-md-2 offset-md-1">
-             <img
-			     height="150px"
-				 width="250px"
-				 class="card"
-				 src="{{ item.item_image}}"
-			 >
-		</div>
-
-		<div class="col-md-4 offset-md-1">
-			<h1>
-               {{ item.item_name}}
-			</h1>
-
-			<h2 style="font-style: italic; font-size: 1.3rem; text-align:justify">
-				
-				{{ item.item_desc}}
-			</h2>
-
-			<h3 "font-style: italic">
-				{{ item.item_price}}
-			</h3>
-		</div>
-
-		<div class="col-md-3 offset-md-1">
-
-            {% if user.is_superuser %}
-
-				<a
-				href="{% url 'food:update_item' item.id %}"
-				style="width: 80px"
-				class="btn btn-warning"
-				>
-				Edit
-			<a/>
-				<a
-				href="{% url 'food:delete_item' item.id %}"
-				style="width: 80px"
-				class="btn btn-danger"
-				>
-				Delete
-			</a>
-				<a
-				href="{% url 'food:index' %}"
-				style="width: 80px"
-				class="btn btn-success"
-				>
-				Back
-			</a>
-
-			{% elif user.is_authenticated and user.profile.user_type == 'Rest' %}
-
-			
-				<a
-				href="{% url 'food:update_item' item.id %}"
-				style="width: 80px"
-				class="btn btn-warning"
-				>
-				Edit
-			<a/>
-				
-				<a
-				href="{% url 'food:index' %}"
-				style="width: 80px"
-				class="btn btn-success"
-				>
-				Back
-			<a/>
-
-			{% elif user.is_authenticated and user.profile.user_type == 'Cust' %}
-
-
-				<a
-				href="{% url 'users:orders' item.id item.prod_code user.username %}"
-				style="width: 80px"
-				class="btn btn-warning"
-				>
-				Order
-			<a/>
-				
-				<a
-				href="{% url 'food:index' %}"
-				style="width: 80px"
-				class="btn btn-success"
-				>
-				Back
-			</a>
-           {% endif %}
-
-		</div>
+<div class="row">
+	<div class="col-md-2 offset-md-1">
+		<img
+			height="150px"
+			width="250px"
+			clas="card"
+			src="{{ item.item_image}}" />
 	</div>
+	<div class="col-md-4 offset-md-1">
+		<h1 style="font-style: italic">{{ item.item_name}}</h1>
+		<h2 style="font-style: italic; font-size: 1.3rem; text-align: justify">
+			{{ item.item_desc}}
+		</h2>
+		<h3 style="font-style: italic">${{ item.item_price}}</h3>
+	</div>
+	<div class="col-md-3 offset-md-1">
+		{% if user.is_superuser %}
+		<a
+			href="{% url 'food:update_item' item.id %}"
+			style="width: 80px"
+			class="btn btn-warning"
+			>Edit
+		</a>
+		<a
+			href="{% url 'food:delete_item' item.id %}"
+			style="width: 80px"
+			class="btn btn-danger"
+			>Delete
+		</a>
+		<a
+			href="{% url 'food:index' %}"
+			style="width: 80px"
+			class="btn btn-success"
+			>Back
+		</a>
+
+		{% elif user.is_authenticated and user.profile.user_type == 'Rest' %}
+
+		<a
+			href="{% url 'food:update_item' item.id %}"
+			style="width: 80px"
+			class="btn btn-warning"
+			>Edit
+		</a>
+		<a
+			href="{% url 'food:index' %}"
+			style="width: 80px"
+			class="btn btn-success"
+			>Back
+		</a>
+
+		{% elif user.is_authenticated and user.profile.user_type == 'Cust' %}
+
+		<a
+			href="{% url 'users:orders' item.id item.prod_code user.username %}"
+			style="width: 80px"
+			class="btn btn-warning">
+			Order
+		</a>
+		<a
+			href="{% url 'food:index' %}"
+			style="width: 80px"
+			class="btn btn-success"
+			>Back
+		</a>
+
+		{%endif%}
+	</div>
+</div>
+
 
 {% if user.is_authenticated %}
-<!--red-->
+	<!--Red-->
+	{% if user.profile.user_type == 'Rest' or user.profile.user_type == 'Admin' %}
 
-     {% if user.profile.user_type == 'Rest' or user.profile.user_type == 'Admin' %}
+	{% for obj in hist %}
 
-     {% for obj in hist %}
-
-     <div class="row mb-1">
+	<div class="row mb-1">
 		<div class="col-md-8 offset-md-2 bg-danger text-white">
 			<div class="row">
-
-				<div class="col-md-3 text-left">
-					{{ obj.user_name }}
-				</div>
-
-				<div class="col-md-3 text-left">
-					{{ obj.prod_ref }}
-				</div>
-
-				<div class="col-md-3 text-left">
-					{{ obj.item_name }}
-				</div>
-
-				<div class="col-md-3 text-left">
-					{{ obj.op_type }}
-				</div>
-				
+				<div class="col-md-3 text-left">{{ obj.user_name}}</div>
+				<div class="col-md-3 text-left">{{ obj.prod_ref}}</div>
+				<div class="col-md-3 text-left">{{ obj.item_name}}</div>
+				<div class="col-md-3 text-left">{{ obj.op_type}}</div>
 			</div>
 		</div>
-
-		<div class="col-md-2">
-		</div>
-	 </div>
-
-
+		<div class="col-md-2"></div>
+	</div>
 {% endfor %}
 
+	{% endif %}
+{% if user.profile.user_type == 'Rest' or user.profile.user_type == 'Cust' or user.profile.user_type == 'Admin' %}
 
-{% endif %}
+	{% for obj in oco %}
 
-<!--green-->
-     {% if user.profile.user_type == 'Rest' or user.profile.user_type == 'Cust' or if user.profile.user_type == 'Admin' %}
-
-     {% for obj in oco %}
-
-     <div class="row mb-1">
+	<div class="row mb-1">
 		<div class="col-md-8 offset-md-2 bg-success text-white">
 			<div class="row">
-
-				<div class="col-md-3 text-left">
-					{{ obj.order_id }}
-				</div>
-
-				<div class="col-md-3 text-left">
-					{{ obj.prod_code }}
-				</div>
-
-				<div class="col-md-3 text-left">
-					{{ obj.quantity }}
-				</div>
-
-				<div class="col-md-3 text-left">
-					{{ obj.user }}
-				</div>
-				
+				<div class="col-md-3 text-left">{{ obj.order_id }}</div>
+				<div class="col-md-3 text-left">{{ obj.prod_code }}</div>
+				<div class="col-md-3 text-left">{{ obj.quantity }}</div>
+				<div class="col-md-3 text-left">{{ obj.user }}</div>
 			</div>
 		</div>
-
-		<div class="col-md-2">
-		</div>
-	 </div>
-
-
+		<div class="col-md-2"></div>
+	</div>
 {% endfor %}
 
-
+	{% endif %}
 {% endif %}
-
-
-{% endif %}
-
-
-
 
 {% endblock %}

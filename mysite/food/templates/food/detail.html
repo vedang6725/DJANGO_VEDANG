@@ -103,7 +103,7 @@
 				<div class="col-md-2 text-left">{{ obj.quantity }}</div>
 				<div class="col-md-2 text-left">{{ obj.user }}</div>
 				<div class="col-md-2 text-left">{% if user.profile.user_type == 'Cust' %}
-					<a class="btn btn-warning btn-sm" href='#'>
+					<a class="btn btn-warning btn-sm" href='{% url 'users:upd_orders' item.id obj.order_id %}'>
 					    Edit Qty
 					</a>
 					{% endif %}

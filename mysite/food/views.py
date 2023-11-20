@@ -6,7 +6,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
-from users.models import CusOrders
+from users.models import CusOrders, CusRatingFeedback
 
 # Create your views here.
 # ----------------------------------------------------------------
@@ -68,10 +68,15 @@ def detail(request, item_id):
             user = request.user.username
         )
 
+    crf = CusRatingFeedback.objects.filter(
+        prod_code=item.prod_code
+    )
+
     context = {
         'item':item,
         'hist':hist,
-        'oco':Obj_CusOrders
+        'oco':Obj_CusOrders,
+        'crf':crf
     }
 
     return render(request, 'food/detail.html', context)

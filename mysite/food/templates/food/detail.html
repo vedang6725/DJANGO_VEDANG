@@ -146,14 +146,14 @@
 				<div class="col-md-2 text-left">{{ obj.user_type }}</div>
 				<div class="col-md-2 text-left">
 					{% if obj.username == user.username %}
-					<a class="btn btn-warning btn-sm" href='#'>
+					<a class="btn btn-warning btn-sm" href='{% url 'users:upd_crf' item.id obj.id %}'>
 					    Edit
 					</a>
 					{% endif %}
 				</div>
 				<div class="col-md-2 text-left">
 					{% if obj.username == user.username %}
-					<a class="btn btn-primary btn-sm" href='#'>
+					<a class="btn btn-primary btn-sm" href="#">
 						Delete
 					</a>
 					{% endif %}

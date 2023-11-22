@@ -153,7 +153,7 @@
 				</div>
 				<div class="col-md-2 text-left">
 					{% if obj.username == user.username %}
-					<a class="btn btn-primary btn-sm" href="#">
+					<a class="btn btn-primary btn-sm" href="{% url 'users:del_crf' item.id obj.id %}">
 						Delete
 					</a>
 					{% endif %}
